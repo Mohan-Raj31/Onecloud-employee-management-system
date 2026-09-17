@@ -36,6 +36,7 @@ This application allows users to manage employee information through a simple an
 
 ## Project Structure
 
+```text
 Onecloud-employee-management-system/
 │
 ├── src/
@@ -73,6 +74,7 @@ Onecloud-employee-management-system/
 ├── tsconfig.json
 ├── vite.config.ts
 └── README.md
+```
 
 ## Application Pages
 
@@ -137,22 +139,26 @@ Employee information is stored in the browser using **localStorage**.
 
 This allows the employee data to remain available after refreshing the browser.
 
+```text
 React State
      ↓
   useEffect
      ↓
 localStorage
+```
 
 ## Routing
 
 The application uses **React Router DOM** for navigation.
 
+```text
 /                    → Dashboard
 /dashboard           → Dashboard
 /employees           → Employee List
 /employees/add       → Add Employee
 /employees/:id       → Employee Details
 /employees/:id/edit  → Edit Employee
+```
 
 ## Responsive Design
 
@@ -196,20 +202,36 @@ On mobile screens, the sidebar is replaced with a **hamburger menu** for navigat
 
 ### Clone the Repository
 
+```bash
 git clone <your-github-repository-url>
+```
 
 ### Navigate to the Project
 
+```bash
 cd Onecloud-employee-management-system
+```
 
 ### Install Dependencies
 
+```bash
 npm install
+```
 
 ## Run the Application
 
+```bash
 npm run dev
+```
 
 ## Build the Application
 
+```bash
 npm run build
+```
+
+## Author
+
+**Mohan Raj**
+
+Java Full Stack Developer
