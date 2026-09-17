@@ -229,9 +229,3 @@ npm run dev
 ```bash
 npm run build
 ```
-
-## Author
-
-**Mohan Raj**
-
-Java Full Stack Developer
