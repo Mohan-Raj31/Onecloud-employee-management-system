@@ -1,10 +1,9 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import type { Employee, EmployeeFormData, SetEmployees } from "../../types";
+import { useEmployees } from "../../hooks/useEmployees";
+import type { Employee, EmployeeFormData } from "../../types";
 
 interface EmployeeFormProps {
-  employees: Employee[];
-  setEmployees: SetEmployees;
   employee?: Employee;
   isEdit?: boolean;
 }
@@ -22,12 +21,16 @@ const fieldClassName = `
 `;
 
 function EmployeeForm({
-  employees,
-  setEmployees,
   employee,
   isEdit = false,
 }: EmployeeFormProps) {
   const navigate = useNavigate();
+
+  const {
+    employees,
+    addEmployee,
+    updateEmployee,
+  } = useEmployees();
 
   const [formData, setFormData] = useState<EmployeeFormData>(
     employee
@@ -59,6 +62,11 @@ function EmployeeForm({
     setFormData((previous) => ({
       ...previous,
       [fieldName]: value,
+    }));
+
+    setErrors((previous) => ({
+      ...previous,
+      [fieldName]: undefined,
     }));
   };
 
@@ -110,47 +118,39 @@ function EmployeeForm({
     return newErrors;
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const validationErrors = validateForm();
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0) {
-      if (isEdit) {
-        setEmployees((previousEmployees) =>
-          previousEmployees.map((previousEmployee) =>
-            previousEmployee.id === Number(formData.id)
-              ? {
-                  ...formData,
-                  id: Number(formData.id),
-                  department: formData.department as Employee["department"],
-                }
-              : previousEmployee,
-          ),
-        );
-
-        navigate("/employees");
-      } else {
-        const newEmployee: Employee = {
-          ...formData,
-          id: Number(formData.id),
-          department: formData.department as Employee["department"],
-        };
-
-        setEmployees((previousEmployees) => [
-          ...previousEmployees,
-          newEmployee,
-        ]);
-
-        navigate("/employees");
-      }
+    if (Object.keys(validationErrors).length !== 0) {
+      return;
     }
+
+    const employeeData: Employee = {
+      ...formData,
+      id: Number(formData.id),
+      department: formData.department as Employee["department"],
+    };
+
+    try {
+  if (isEdit) {
+    await updateEmployee(employeeData);
+  } else {
+    await addEmployee(employeeData);
+  }
+
+  navigate("/employees");
+} catch (error) {
+  console.error("Employee operation failed:", error);
+}
   };
 
   const groupClassName = "flex min-w-0 flex-col gap-2";
   const labelClassName = "text-[12px] font-bold text-[#344054]";
-  const errorClassName = "text-[11px] font-semibold leading-[1.4] text-[#dc2626]";
+  const errorClassName =
+    "text-[11px] font-semibold leading-[1.4] text-[#dc2626]";
 
   return (
     <form
@@ -168,55 +168,122 @@ function EmployeeForm({
     >
       <div className={groupClassName}>
         <label className={labelClassName}>Employee ID</label>
-        <input className={fieldClassName} type="text" name="id" value={formData.id} onChange={handleChange} />
+
+        <input
+          className={fieldClassName}
+          type="text"
+          name="id"
+          value={formData.id}
+          onChange={handleChange}
+        />
+
         {errors.id && <p className={errorClassName}>{errors.id}</p>}
       </div>
 
       <div className={groupClassName}>
         <label className={labelClassName}>Full Name</label>
-        <input className={fieldClassName} type="text" name="name" value={formData.name} onChange={handleChange} />
+
+        <input
+          className={fieldClassName}
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+
         {errors.name && <p className={errorClassName}>{errors.name}</p>}
       </div>
 
       <div className={groupClassName}>
         <label className={labelClassName}>Email</label>
-        <input className={fieldClassName} type="email" name="email" value={formData.email} onChange={handleChange} />
+
+        <input
+          className={fieldClassName}
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+
         {errors.email && <p className={errorClassName}>{errors.email}</p>}
       </div>
 
       <div className={groupClassName}>
         <label className={labelClassName}>Phone</label>
-        <input className={fieldClassName} type="text" name="phone" value={formData.phone} onChange={handleChange} />
+
+        <input
+          className={fieldClassName}
+          type="text"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+        />
+
         {errors.phone && <p className={errorClassName}>{errors.phone}</p>}
       </div>
 
       <div className={groupClassName}>
         <label className={labelClassName}>Department</label>
-        <select className={fieldClassName} name="department" value={formData.department} onChange={handleChange}>
+
+        <select
+          className={fieldClassName}
+          name="department"
+          value={formData.department}
+          onChange={handleChange}
+        >
           <option value="">Select Department</option>
           <option value="Development">Development</option>
           <option value="HR">HR</option>
           <option value="Finance">Finance</option>
           <option value="CRM">CRM</option>
         </select>
-        {errors.department && <p className={errorClassName}>{errors.department}</p>}
+
+        {errors.department && (
+          <p className={errorClassName}>{errors.department}</p>
+        )}
       </div>
 
       <div className={groupClassName}>
         <label className={labelClassName}>Designation</label>
-        <input className={fieldClassName} type="text" name="designation" value={formData.designation} onChange={handleChange} />
-        {errors.designation && <p className={errorClassName}>{errors.designation}</p>}
+
+        <input
+          className={fieldClassName}
+          type="text"
+          name="designation"
+          value={formData.designation}
+          onChange={handleChange}
+        />
+
+        {errors.designation && (
+          <p className={errorClassName}>{errors.designation}</p>
+        )}
       </div>
 
       <div className={groupClassName}>
         <label className={labelClassName}>Date of Joining</label>
-        <input className={fieldClassName} type="date" name="joiningDate" value={formData.joiningDate} onChange={handleChange} />
-        {errors.joiningDate && <p className={errorClassName}>{errors.joiningDate}</p>}
+
+        <input
+          className={fieldClassName}
+          type="date"
+          name="joiningDate"
+          value={formData.joiningDate}
+          onChange={handleChange}
+        />
+
+        {errors.joiningDate && (
+          <p className={errorClassName}>{errors.joiningDate}</p>
+        )}
       </div>
 
       <div className={groupClassName}>
         <label className={labelClassName}>Status</label>
-        <select className={fieldClassName} name="status" value={formData.status} onChange={handleChange}>
+
+        <select
+          className={fieldClassName}
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+        >
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </select>

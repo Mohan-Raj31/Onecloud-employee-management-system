@@ -1,40 +1,62 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import EmployeeForm from "../components/employees/EmployeeForm";
-import type { Employee, SetEmployees } from "../types";
+import { useEmployees } from "../hooks/useEmployees";
 
-interface EditEmployeeProps {
-  employees: Employee[];
-  setEmployees: SetEmployees;
-}
+function EditEmployee() {
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-function EditEmployee({ employees, setEmployees }: EditEmployeeProps) {
-  const { id } = useParams<{ id: string }>();
+  const employeeId = Number(id);
+
+  const {
+    employees,
+    isLoading,
+  } = useEmployees();
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[330px] items-center justify-center">
+        <p className="text-[14px] font-semibold text-[#667085]">
+          Loading employee...
+        </p>
+      </div>
+    );
+  }
 
   const employee = employees.find(
-    (employee) => employee.id === Number(id)
+    (item) => item.id === employeeId,
   );
 
   if (!employee) {
     return (
-      <h2 className="text-[19px] font-bold text-[#344054]">
-        Employee not found
-      </h2>
+      <div className="flex min-h-[330px] items-center justify-center">
+        <div className="text-center">
+          <h2 className="mb-2 text-xl font-bold text-[#344054]">
+            Employee Not Found
+          </h2>
+
+          <button
+            type="button"
+            onClick={() => navigate("/employees")}
+            className="
+              rounded-lg bg-[#4c51f5]
+              px-5 py-2.5
+              text-sm font-semibold text-white
+              transition hover:bg-[#383ddf]
+            "
+          >
+            Back to Employees
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="mx-auto w-full max-w-[1050px]">
-      <h1 className="mb-[27px] text-[30px] font-extrabold tracking-[-1px] text-[#111827] max-[650px]:mb-[22px] max-[650px]:text-[25px]">
-        Edit Employee
-      </h1>
-
-      <EmployeeForm
-        employees={employees}
-        setEmployees={setEmployees}
-        employee={employee}
-        isEdit={true}
-      />
-    </div>
+    <EmployeeForm
+      employee={employee}
+      isEdit={true}
+    />
   );
 }
 

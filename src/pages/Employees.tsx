@@ -1,42 +1,32 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import EmployeeCard from "../components/employees/EmployeeCard";
 import EmployeeSearch from "../components/employees/EmployeeSearch";
 import EmployeeFilters from "../components/employees/EmployeeFilters";
-import type { Employee, SetEmployees } from "../types";
+import { useEmployees } from "../hooks/useEmployees";
 
-interface EmployeesProps {
-  employees: Employee[];
-  setEmployees: SetEmployees;
-}
-
-function Employees({ employees, setEmployees }: EmployeesProps) {
+function Employees() {
   const navigate = useNavigate();
+
+  const {
+    employees,
+    isLoading,
+    isError,
+    deleteEmployee,
+    isDeleting,
+  } = useEmployees();
 
   const [search, setSearch] = useState("");
   const [department, setDepartment] = useState("All");
   const [status, setStatus] = useState("All");
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this employee?",
     );
 
     if (confirmed) {
-      setEmployees((previousEmployees) =>
-        previousEmployees.filter((employee) => employee.id !== id),
-      );
+      await deleteEmployee(id);
     }
   };
 
@@ -48,12 +38,13 @@ function Employees({ employees, setEmployees }: EmployeesProps) {
     const matchesDepartment =
       department === "All" || employee.department === department;
 
-    const matchesStatus = status === "All" || employee.status === status;
+    const matchesStatus =
+      status === "All" || employee.status === status;
 
     return matchesSearch && matchesDepartment && matchesStatus;
   });
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div
         className="
@@ -77,12 +68,13 @@ function Employees({ employees, setEmployees }: EmployeesProps) {
     );
   }
 
-  if (error) {
+  if (isError) {
     return (
       <div className="flex min-h-[330px] flex-col items-center justify-center rounded-[20px] border border-dashed border-[#cfd5df] bg-gradient-to-br from-white to-[#f8f9ff] p-10 text-center shadow-[0_10px_30px_rgba(15,23,42,0.05)]">
         <h2 className="mb-[9px] text-[19px] font-bold text-[#344054]">
           Something went wrong
         </h2>
+
         <p className="max-w-[450px] text-[13px] leading-[1.6] text-[#667085]">
           Unable to load employees.
         </p>
@@ -131,6 +123,7 @@ function Employees({ employees, setEmployees }: EmployeesProps) {
           <h2 className="mb-[9px] text-[19px] font-bold text-[#344054]">
             No employees found
           </h2>
+
           <p className="max-w-[450px] text-[13px] leading-[1.6] text-[#667085]">
             There are no employees matching your search or filters.
           </p>

@@ -1,23 +1,62 @@
-import { useParams, useNavigate } from "react-router-dom";
-import type { Employee } from "../types";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEmployees } from "../hooks/useEmployees";
 
-interface EmployeeDetailsProps {
-  employees: Employee[];
-}
-
-function EmployeeDetails({ employees }: EmployeeDetailsProps) {
+function EmployeeDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
+  const {
+    employees,
+    isLoading,
+    isError,
+  } = useEmployees();
+
   const employee = employees.find(
-    (employee) => employee.id === Number(id)
+    (item) => item.id === Number(id),
   );
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[330px] items-center justify-center">
+        <p className="text-[14px] font-semibold text-[#667085]">
+          Loading employee...
+        </p>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex min-h-[330px] items-center justify-center">
+        <p className="text-[14px] font-semibold text-[#dc2626]">
+          Unable to load employee details.
+        </p>
+      </div>
+    );
+  }
 
   if (!employee) {
     return (
-      <h2 className="text-[19px] font-bold text-[#344054]">
-        Employee not found
-      </h2>
+      <div className="flex min-h-[330px] items-center justify-center">
+        <div className="text-center">
+          <h2 className="mb-2 text-xl font-bold text-[#344054]">
+            Employee Not Found
+          </h2>
+
+          <button
+            type="button"
+            onClick={() => navigate("/employees")}
+            className="
+              rounded-lg bg-[#4c51f5]
+              px-5 py-2.5
+              text-sm font-semibold text-white
+              transition hover:bg-[#383ddf]
+            "
+          >
+            Back to Employees
+          </button>
+        </div>
+      </div>
     );
   }
 
@@ -53,7 +92,7 @@ function EmployeeDetails({ employees }: EmployeeDetailsProps) {
       >
         <img
           src={`https://ui-avatars.com/api/?name=${encodeURIComponent(
-            employee.name
+            employee.name,
           )}&size=150`}
           alt={employee.name}
           className="
@@ -89,6 +128,7 @@ function EmployeeDetails({ employees }: EmployeeDetailsProps) {
             <strong className="text-[12px] font-bold text-[#344054]">
               {label}
             </strong>
+
             <span>{value}</span>
           </p>
         ))}
@@ -101,9 +141,12 @@ function EmployeeDetails({ employees }: EmployeeDetailsProps) {
           "
         >
           <button
-            onClick={() => navigate(`/employees/${employee.id}/edit`)}
+            type="button"
+            onClick={() =>
+              navigate(`/employees/${employee.id}/edit`)
+            }
             className="
-              min-h-[43px] min-w-[145px] rounded-[9px] border-0
+              min-h-[43px] min-w-[145px] rounded-[9px]
               bg-gradient-to-br from-[#382fea] via-[#1416b5] to-[#3a14c5]
               px-[18px] text-[14px] font-bold text-white
               shadow-[0_8px_20px_rgba(79,70,229,0.22)]
@@ -117,11 +160,12 @@ function EmployeeDetails({ employees }: EmployeeDetailsProps) {
           </button>
 
           <button
+            type="button"
             onClick={() => navigate("/employees")}
             className="
               min-h-[43px] min-w-[145px] rounded-[9px]
-              border border-[#dfe3eb] bg-white px-[18px]
-              text-[14px] font-bold text-[#475467]
+              border border-[#dfe3eb] bg-white
+              px-[18px] text-[14px] font-bold text-[#475467]
               transition-all duration-200
               hover:border-[#c7ccd5] hover:bg-[#f8fafc]
               max-[650px]:w-full

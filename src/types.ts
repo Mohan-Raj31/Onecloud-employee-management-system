@@ -1,4 +1,3 @@
-export type Department = "Development" | "HR" | "Finance" | "CRM";
 export type EmployeeStatus = "Active" | "Inactive";
 
 export interface Employee {
@@ -6,7 +5,7 @@ export interface Employee {
   name: string;
   email: string;
   phone: string;
-  department: Department;
+  department: string;
   designation: string;
   joiningDate: string;
   status: EmployeeStatus;
@@ -23,7 +22,3 @@ export interface EmployeeFormData {
   joiningDate: string;
   status: EmployeeStatus;
 }
-
-import type { Dispatch, SetStateAction } from "react";
-
-export type SetEmployees = Dispatch<SetStateAction<Employee[]>>;
