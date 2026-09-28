@@ -25,13 +25,13 @@ function Sidebar({ isMenuOpen, onMenuClose, isCollapsed, onToggleCollapse }: Sid
         overflow-y-auto border-r border-white/5
         bg-gradient-to-b from-[#080b12] via-[#171d36] to-[#1e1b4b]
         shadow-[8px_0_30px_rgba(15,23,42,0.08)]
-        transition-[width,transform] duration-200
+        transition-transform duration-400 ease-in-out
         ${isCollapsed ? "w-[78px] min-w-[78px]" : "w-[255px] min-w-[255px] max-[1200px]:w-[225px] max-[1200px]:min-w-[225px]"}
-        max-[850px]:fixed max-[850px]:right-0 max-[850px]:left-auto max-[850px]:top-[65px]
+        max-[850px]:fixed max-[850px]:left-0 max-[850px]:right-auto max-[850px]:top-[65px]
         max-[850px]:z-[120] max-[850px]:h-[calc(100vh-65px)]
         max-[850px]:w-[260px] max-[850px]:min-w-[260px]
         max-[850px]:px-[15px]
-        ${isMenuOpen ? "max-[850px]:translate-x-0 max-[850px]:visible" : "max-[850px]:translate-x-full max-[850px]:invisible"}
+        ${isMenuOpen ? "max-[850px]:translate-x-0 max-[850px]:visible" : "max-[850px]:-translate-x-full max-[850px]:invisible"}
         max-[400px]:w-[220px] max-[400px]:min-w-[220px]
       `}
     >
