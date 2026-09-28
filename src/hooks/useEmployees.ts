@@ -58,6 +58,7 @@ export const useEmployees = () => {
 
     isLoading: employeesQuery.isLoading,
     isError: employeesQuery.isError,
+    refetch: employeesQuery.refetch,
 
     addEmployee: addEmployeeMutation.mutateAsync,
     updateEmployee: updateEmployeeMutation.mutateAsync,

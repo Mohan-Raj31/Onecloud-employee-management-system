@@ -90,9 +90,14 @@ function Employees() {
           max-[650px]:mb-[22px] max-[650px]:flex-col max-[650px]:items-stretch
         "
       >
-        <h1 className="text-[31px] font-extrabold tracking-[-1px] text-[#0d2458] max-[650px]:text-[25px]">
-          Employees
-        </h1>
+        <div>
+          <h1 className="text-[31px] font-extrabold tracking-[-1px] max-[650px]:text-[25px] bg-gradient-to-r from-blue-900 to-indigo-500 bg-clip-text text-transparent">
+            Employees
+          </h1>
+          <p className="mt-1 text-sm font-medium text-[#667085]">
+            Manage and view all employees in your organization.
+          </p>
+        </div>
 
         <button
           onClick={() => navigate("/employees/add")}
@@ -111,12 +116,14 @@ function Employees() {
         </button>
       </div>
 
-      <EmployeeSearch onSearch={setSearch} />
+      <div className="mb-[25px] grid items-stretch gap-[15px] lg:grid-cols-[minmax(0,1fr)_auto] max-[850px]:grid-cols-1">
+        <EmployeeSearch onSearch={setSearch} />
 
-      <EmployeeFilters
-        onDepartmentChange={setDepartment}
-        onStatusChange={setStatus}
-      />
+        <EmployeeFilters
+          onDepartmentChange={setDepartment}
+          onStatusChange={setStatus}
+        />
+      </div>
 
       {filteredEmployees.length === 0 ? (
         <div className="flex min-h-[330px] flex-col items-center justify-center rounded-[20px] border border-dashed border-[#cfd5df] bg-gradient-to-br from-white to-[#f8f9ff] p-10 text-center shadow-[0_10px_30px_rgba(15,23,42,0.05)]">

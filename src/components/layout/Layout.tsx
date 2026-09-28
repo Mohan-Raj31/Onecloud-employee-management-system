@@ -8,6 +8,7 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const handleMenuClick = () => {
     setIsMenuOpen((previous) => !previous);
@@ -30,31 +31,38 @@ function Layout({ children }: LayoutProps) {
       <Header
         onMenuClick={handleMenuClick}
         isMenuOpen={isMenuOpen}
+        isSidebarCollapsed={isSidebarCollapsed}
       />
 
-      <div
-        className="
-          flex min-h-[calc(100vh-76px)]
-          max-[650px]:block max-[650px]:min-h-[calc(100vh-65px)]
-        "
-      >
-        <Sidebar
-          isMenuOpen={isMenuOpen}
-          onMenuClose={handleMenuClose}
-        />
+      <Sidebar
+        isMenuOpen={isMenuOpen}
+        onMenuClose={handleMenuClose}
+        isCollapsed={isSidebarCollapsed}
+        onToggleCollapse={() => setIsSidebarCollapsed((previous) => !previous)}
+      />
 
-        <main
-          className="
-            min-w-0 flex-1 overflow-x-hidden p-9
-            max-[1200px]:p-7
-            max-[850px]:p-6
-            max-[650px]:p-[20px_14px]
-            max-[400px]:p-[16px_11px]
-          "
-        >
-          {children}
-        </main>
-      </div>
+      {isMenuOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation menu"
+          onClick={handleMenuClose}
+          className="fixed inset-0 top-[65px] z-[105] hidden bg-slate-950/30 backdrop-blur-[1px] max-[850px]:block"
+        />
+      )}
+
+      <main
+        className={`
+          relative z-0 min-w-0 min-h-screen overflow-x-hidden p-9 pt-[120px] max-[850px]:pt-[24px]
+          transition-[margin] duration-200
+          ${isSidebarCollapsed ? "ml-[78px]" : "ml-[255px] max-[1200px]:ml-[225px]"}
+          max-[1200px]:p-7
+          max-[850px]:ml-0 max-[850px]:p-[24px_18px]
+          max-[650px]:p-[20px_14px]
+          max-[400px]:p-[16px_11px]
+        `}
+      >
+        {children}
+      </main>
     </div>
   );
 }

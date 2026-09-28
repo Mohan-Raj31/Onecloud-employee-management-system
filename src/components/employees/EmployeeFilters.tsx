@@ -27,7 +27,7 @@ function EmployeeFilters({
   return (
     <div
       className="
-        mb-[25px] flex flex-wrap items-end gap-[15px]
+        mb-0 flex flex-wrap items-end gap-[15px]
         rounded-[16px] border border-[#e7eaf1]
         bg-gradient-to-br from-white to-[#f8faff]
         p-5 px-[22px]
@@ -77,7 +77,7 @@ function EmployeeFilters({
             focus:shadow-[0_0_0_4px_rgba(99,102,241,0.09)]
           "
         >
-          <option value="All">All</option>
+          <option value="All">All Status</option>
           <option value="Active">Active</option>
           <option value="Inactive">Inactive</option>
         </select>

@@ -4,3 +4,19 @@
 html {
   scroll-behavior: smooth;
 }
+
+
+/* Keep headings and labels readable on narrow screens without forcing horizontal overflow. */
+@media (max-width: 650px) {
+  h1, h2, h3 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    max-width: 100%;
+  }
+}

@@ -17,7 +17,7 @@ function EmployeeSearch({ onSearch }: EmployeeSearchProps) {
   return (
     <div
       className="
-        relative mb-[18px] w-full rounded-[16px]
+        relative mb-0 w-full rounded-[16px]
         border border-[#e7eaf1]
         bg-gradient-to-br from-white to-[#f8faff]
         p-5 px-[22px]
