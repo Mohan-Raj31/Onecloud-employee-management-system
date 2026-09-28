@@ -1,231 +1,264 @@
 # OneCloud Employee Management System
 
-A responsive Employee Management System built using **React and TypeScript**.
+A responsive enterprise-style management application built using React, TypeScript, Tailwind CSS, TanStack Query, and React Router.
 
-This application allows users to manage employee information through a simple and responsive interface.
+The application combines **Employee Management**, **Super Admin Dashboard**, and **Tenant Management** into a single application.
+
+---
+
+## Overview
+
+The OneCloud Employee Management System is designed to provide an organized interface for managing employees and tenants while giving Super Administrators an overview of platform-level information.
+
+The project follows a reusable component-based architecture and uses TanStack Query for data fetching, mutations, caching, and query invalidation.
+
+---
 
 ## Features
 
-- Dashboard with dynamic employee statistics
+### Employee Management
+
+- View all employees
 - Add new employees
 - Edit employee information
-- Delete employees with confirmation
 - View employee details
-- Search employees by name
-- Filter employees by department
-- Filter employees by status
-- Combined search and filtering
-- Form validation
-- Unique Employee ID validation
-- Email and phone number validation
-- Loading, empty and error states
-- Data persistence using localStorage
-- React Router navigation
-- Responsive design for desktop, tablet and mobile
-- Mobile hamburger menu
-
-## Technologies Used
-
-- React
-- TypeScript
-- React Router DOM
-- Vite
-- HTML5
-- CSS3
-- LocalStorage
-
-## Project Structure
-
-```text
-Onecloud-employee-management-system/
-│
-├── src/
-│   ├── components/
-│   │   ├── employees/
-│   │   │   ├── EmployeeCard.tsx
-│   │   │   ├── EmployeeFilters.tsx
-│   │   │   ├── EmployeeForm.tsx
-│   │   │   └── EmployeeSearch.tsx
-│   │   │
-│   │   └── layout/
-│   │       ├── Header.tsx
-│   │       ├── Layout.tsx
-│   │       └── Sidebar.tsx
-│   │
-│   ├── data/
-│   │   └── employees.ts
-│   │
-│   ├── pages/
-│   │   ├── AddEmployee.tsx
-│   │   ├── Dashboard.tsx
-│   │   ├── EditEmployee.tsx
-│   │   ├── EmployeeDetails.tsx
-│   │   └── Employees.tsx
-│   │
-│   ├── routes/
-│   │   └── AppRoutes.tsx
-│   │
-│   ├── App.tsx
-│   ├── main.tsx
-│   ├── types.ts
-│   └── index.css
-│
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── README.md
-```
-
-## Application Pages
-
-### Dashboard
-
-The Dashboard displays employee statistics dynamically:
-
-- Total Employees
-- Active Employees
-- Inactive Employees
-- Departments
-
-### Employees
-
-The Employees page provides:
-
-- Employee list
+- Delete employees
 - Search employees
-- Department filtering
-- Status filtering
-- Add Employee
-- View Details
-- Delete Employee
+- Filter employees
+- Manage employee status
+- Employee form validation
+- Responsive employee cards and layouts
 
-### Add Employee
+### Super Admin Dashboard
 
-Allows users to add a new employee.
+- Platform overview
+- Total tenants
+- Active tenants
+- Inactive tenants
+- Total users
+- Active licenses
+- Employee statistics
+- Platform health
+- Tenant growth
+- Tenant status
+- Recent activities
+- Responsive dashboard cards
 
-The form includes validation for required fields, Employee ID, email and phone number.
+### Tenant Management
 
-### Edit Employee
+- View all tenants
+- Create new tenants
+- View tenant details
+- Edit tenant information
+- Delete tenants
+- Activate tenants
+- Deactivate tenants
+- Search tenants
+- Filter by tenant status
+- Filter by subscription plan
+- Sort tenant data
+- Tenant statistics
 
-Allows users to update existing employee information using a pre-filled form.
-
-### Employee Details
-
-Displays detailed information about a selected employee.
-
-## Search and Filtering
-
-Employees can be searched by name and filtered by:
-
-- Department
-- Status
-
-Search and filters can also be used together to find specific employees.
-
-## Form Validation
-
-The application validates:
-
-- Required fields
-- Unique Employee ID
-- Valid email format
-- 10-digit phone number
-
-Validation messages are displayed when invalid information is entered.
-
-## LocalStorage
-
-Employee information is stored in the browser using **localStorage**.
-
-This allows the employee data to remain available after refreshing the browser.
-
-```text
-React State
-     ↓
-  useEffect
-     ↓
-localStorage
-```
-
-## Routing
-
-The application uses **React Router DOM** for navigation.
-
-```text
-/                    → Dashboard
-/dashboard           → Dashboard
-/employees           → Employee List
-/employees/add       → Add Employee
-/employees/:id       → Employee Details
-/employees/:id/edit  → Edit Employee
-```
-
-## Responsive Design
+### Subscription Plans
 
 The application supports:
 
-- Desktop
-- Tablet
-- Mobile
+- Basic
+- Pro
+- Enterprise
 
-On mobile screens, the sidebar is replaced with a **hamburger menu** for navigation.
+### Tenant Status
 
-## React Concepts Used
+- Active
+- Inactive
 
-- Functional Components
-- TSX
-- Props
-- useState
-- useEffect
-- Event Handling
-- Controlled Components
-- Conditional Rendering
-- map()
-- filter()
-- Component Reusability
-- React Router
-- useNavigate
-- useParams
-- localStorage
+---
 
-## TypeScript Concepts Used
+## Technology Stack
 
-- Interfaces
-- Type Aliases
-- Union Types
-- Typed Props
-- Typed State
-- Typed Event Handlers
-- Type-safe Functions
+| Technology | Usage |
+|---|---|
+| React | UI development |
+| TypeScript | Type safety |
+| Tailwind CSS | Styling and responsive design |
+| TanStack Query | Data fetching and state management |
+| React Router DOM | Application routing |
+| Vite | Development and build tool |
+| LocalStorage | Local data persistence |
 
-## Installation
+---
 
-### Clone the Repository
+## TanStack Query
 
-```bash
-git clone <your-github-repository-url>
-```
+TanStack Query is used to manage application data and asynchronous operations.
 
-### Navigate to the Project
+The project uses:
 
-```bash
-cd Onecloud-employee-management-system
-```
+- `useQuery`
+- `useMutation`
+- `useQueryClient`
+- Query invalidation
+- Refetching
+- Loading states
+- Error states
 
-### Install Dependencies
+Custom hooks are used to keep query and mutation logic separate from UI components.
 
-```bash
+### Employee
+
+```text
+useEmployees
+     ↓
+employeeService
+     ↓
+LocalStorage
+Tenant
+useTenants
+     ↓
+tenantService
+     ↓
+LocalStorage
+Dashboard
+useSuperAdminDashboard
+     ↓
+dashboardService
+     ↓
+Dashboard Data
+Dashboard Card Architecture
+
+
+The main application routes are:
+
+/dashboard
+
+/employees
+/employees/add
+/employees/:id
+/employees/:id/edit
+
+/tenants
+/tenants/new
+/tenants/:id
+/tenants/:id/edit
+
+The application also maintains redirects for previous Super Admin routes where required.
+
+Project Structure
+src/
+│
+├── components/
+│   ├── employees/
+│   └── layout/
+│
+├── data/
+│   └── employees.ts
+│
+├── hooks/
+│   └── useEmployees.ts
+│
+├── pages/
+│   ├── Dashboard.tsx
+│   ├── Employees.tsx
+│   ├── AddEmployee.tsx
+│   ├── EditEmployee.tsx
+│   └── EmployeeDetails.tsx
+│
+├── routes/
+│   └── AppRoutes.tsx
+│
+├── services/
+│   └── employeeService.ts
+│
+├── super-admin/
+│   ├── components/
+│   │   ├── dashboard/
+│   │   └── tenant-management/
+│   │
+│   ├── data/
+│   ├── hooks/
+│   ├── pages/
+│   └── services/
+│
+├── App.tsx
+├── main.tsx
+├── types.ts
+└── index.css
+Responsive Design
+
+The application is designed to work across different screen sizes:
+
+Desktop
+Laptop
+Tablet
+Mobile
+
+Responsive features include:
+
+Collapsible sidebar
+Mobile hamburger navigation
+Responsive dashboard cards
+Responsive employee layouts
+Responsive tenant management
+Responsive forms
+Tablet-specific layouts
+Mobile-friendly navigation
+Data Management
+
+The current application uses browser LocalStorage for employee and tenant data.
+
+The application separates data operations into service files, making the project easier to maintain and allowing the service layer to be replaced with real backend APIs in the future.
+
+Current services include:
+
+employeeService.ts
+tenantService.ts
+dashboardService.ts
+TypeScript
+
+The project uses TypeScript throughout the application.
+
+Important types include:
+
+Employee
+EmployeeFormData
+EmployeeStatus
+
+Tenant
+TenantFormData
+TenantStatus
+SubscriptionPlan
+TenantStats
+
+DashboardStats
+PlatformHealth
+RecentActivity
+TenantGrowthPoint
+
+This provides type safety across components, hooks, services, forms, and dashboard data.
+
+Getting Started
+Prerequisites
+
+Make sure Node.js and npm are installed.
+
+node -v
+npm -v
+Install Dependencies
 npm install
-```
-
-## Run the Application
-
-```bash
+Start Development Server
 npm run dev
-```
-
-## Build the Application
-
-```bash
+Build for Production
 npm run build
-```
+Run Lint
+npm run lint
+Deployment
+
+The project is built using Vite and is suitable for deployment on platforms such as Vercel.
+
+Production build:
+
+npm run build
+
+The generated production files are available in:
+
+dist/
