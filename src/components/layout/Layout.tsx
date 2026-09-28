@@ -52,14 +52,14 @@ function Layout({ children }: LayoutProps) {
 
       <main
         className={`
-          relative z-0 min-w-0 min-h-screen overflow-x-hidden p-9 pt-[120px] max-[850px]:pt-[24px]
-          transition-[margin] duration-200
-          ${isSidebarCollapsed ? "ml-[78px]" : "ml-[255px] max-[1200px]:ml-[225px]"}
-          max-[1200px]:p-7
-          max-[850px]:ml-0 max-[850px]:p-[24px_18px]
-          max-[650px]:p-[20px_14px]
-          max-[400px]:p-[16px_11px]
-        `}
+  relative z-0 min-w-0 min-h-screen overflow-x-hidden p-9 pt-[120px]
+  transition-[margin] duration-200
+  ${isSidebarCollapsed ? "ml-[78px]" : "ml-[255px] max-[1200px]:ml-[225px]"}
+  max-[1200px]:px-7 max-[1200px]:pb-7
+  max-[850px]:ml-0 max-[850px]:px-[18px] max-[850px]:pt-[24px] max-[850px]:pb-[24px]
+  max-[650px]:px-[14px] max-[650px]:pt-[20px] max-[650px]:pb-[20px]
+  max-[400px]:px-[11px] max-[400px]:pt-[16px] max-[400px]:pb-[16px]
+`}
       >
         {children}
       </main>

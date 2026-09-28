@@ -7,9 +7,14 @@ import TenantGrowthChart from "../components/dashboard/TenantGrowthChart";
 import TenantStatusChart from "../components/dashboard/TenantStatusChart";
 import { useEmployees } from "../../hooks/useEmployees";
 import { useSuperAdminDashboard } from "../hooks/useSuperAdminDashboard";
+import {
+  kpiCardConfig,
+  employeeStatCardConfig,
+} from "../data/dashboardData";
 
 function Dashboard() {
   const navigate = useNavigate();
+  
   const {
     data,
     isLoading: isDashboardLoading,
@@ -61,7 +66,19 @@ function Dashboard() {
     );
   }
 
+  
+
   const { stats, health, growth, activities, tenantStatus } = data;
+
+  const kpiCards = kpiCardConfig.map((card) => ({
+  ...card,
+  value: stats[card.key as keyof typeof stats].toLocaleString(),
+}));
+
+const employeeStatCards = employeeStatCardConfig.map((card) => ({
+  ...card,
+  value: employeeStats[card.key as keyof typeof employeeStats],
+}));
 
   return (
     <div className="mx-auto w-full max-w-[1500px] space-y-7">
@@ -113,42 +130,17 @@ function Dashboard() {
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
-          <KpiCard
-            label="Total Tenants"
-            value={stats.totalTenants.toLocaleString()}
-            helper="Organizations on platform"
-            icon="◈"
-            tone="indigo"
-          />
-          <KpiCard
-            label="Active Tenants"
-            value={stats.activeTenants.toLocaleString()}
-            helper="Currently operational"
-            icon="✓"
-            tone="green"
-          />
-          <KpiCard
-            label="Inactive Tenants"
-            value={stats.inactiveTenants.toLocaleString()}
-            helper="Require attention"
-            icon="○"
-            tone="red"
-          />
-          <KpiCard
-            label="Total Users"
-            value={stats.totalUsers.toLocaleString()}
-            helper="Users across tenants"
-            icon="◉"
-            tone="blue"
-          />
-          <KpiCard
-            label="Active Licenses"
-            value={stats.activeLicenses.toLocaleString()}
-            helper="Licenses currently enabled"
-            icon="◇"
-            tone="amber"
-          />
-        </div>
+  {kpiCards.map((card) => (
+    <KpiCard
+      key={card.key}
+      label={card.label}
+      value={card.value}
+      helper={card.helper}
+      icon={card.icon}
+      tone={card.tone}
+    />
+  ))}
+</div>
       </section>
 
       <section className="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.85fr)]">
@@ -183,26 +175,15 @@ function Dashboard() {
         </div>
 
         <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <EmployeeStatCard
-            label="Total Employees"
-            value={employeeStats.total}
-          />
-          <EmployeeStatCard
-            label="Active Employees"
-            value={employeeStats.active}
-            tone="green"
-          />
-          <EmployeeStatCard
-            label="Inactive Employees"
-            value={employeeStats.inactive}
-            tone="red"
-          />
-          <EmployeeStatCard
-            label="Departments"
-            value={employeeStats.departments}
-            tone="violet"
-          />
-        </div>
+  {employeeStatCards.map((card) => (
+    <EmployeeStatCard
+      key={card.key}
+      label={card.label}
+      value={card.value}
+      tone={card.tone}
+    />
+  ))}
+</div>
       </section>
     </div>
   );
