@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import TenantForm from "../../components/tenant-management/TenantForm";
-import { useTenant, useUpdateTenant } from "../../hooks/useTenants";
-import type { TenantFormData } from "../../../types";
+import TenantForm from "../components/tenant-management/TenantForm";
+import { useTenant, useUpdateTenant } from "../hooks/useTenants";
+import type { TenantFormData } from "../types";
 
 function EditTenant() {
   const navigate = useNavigate();

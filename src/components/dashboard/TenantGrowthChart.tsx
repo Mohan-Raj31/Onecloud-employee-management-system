@@ -1,4 +1,4 @@
-import type { TenantGrowthPoint } from "../../../types";
+import type { TenantGrowthPoint } from "../../types";
 
 interface TenantGrowthChartProps {
   data: TenantGrowthPoint[];

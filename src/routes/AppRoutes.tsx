@@ -1,13 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import Dashboard from "../super-admin/pages/Dashboard";
+import Dashboard from "../pages/Dashboard";
 import Employees from "../pages/Employees";
 import EmployeeDetails from "../pages/EmployeeDetails";
 import AddEmployee from "../pages/AddEmployee";
 import EditEmployee from "../pages/EditEmployee";
-import Tenants from "../super-admin/pages/tenants/Tenants";
-import CreateTenant from "../super-admin/pages/tenants/CreateTenant";
-import EditTenant from "../super-admin/pages/tenants/EditTenant";
-import TenantDetails from "../super-admin/pages/tenants/TenantDetails";
+import Tenants from "../pages/Tenants";
+import CreateTenant from "../pages/CreateTenant";
+import EditTenant from "../pages/EditTenant";
+import TenantDetails from "../pages/TenantDetails";
 
 function AppRoutes() {
   return (

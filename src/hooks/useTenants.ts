@@ -13,7 +13,7 @@ import {
   getTenants,
   updateTenant,
 } from "../services/tenantService";
-import type { TenantFormData } from "../../types";
+import type { TenantFormData } from "../types";
 import { dashboardKeys } from "./useSuperAdminDashboard";
 
 export const tenantKeys = {

@@ -1,4 +1,4 @@
-import type { PlatformHealth as PlatformHealthData } from "../../../types";
+import type { PlatformHealth as PlatformHealthData } from "../../types";
 
 interface PlatformHealthProps {
   health: PlatformHealthData;

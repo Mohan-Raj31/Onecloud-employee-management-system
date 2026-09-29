@@ -1,4 +1,4 @@
-import type { Tenant } from "../../types";
+import type { Tenant } from "../types";
 
 export const tenants: Tenant[] = [
   {

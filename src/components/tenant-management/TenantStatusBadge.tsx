@@ -1,4 +1,4 @@
-import type { TenantStatus } from "../../../types";
+import type { TenantStatus } from "../../types";
 
 function TenantStatusBadge({ status }: { status: TenantStatus }) {
   const isActive = status === "Active";

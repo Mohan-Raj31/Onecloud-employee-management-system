@@ -4,7 +4,7 @@ import type {
   Tenant,
   TenantFormData,
   TenantStats,
-} from "../../types";
+} from "../types";
 
 const TENANTS_STORAGE_KEY = "onecloud_super_admin_tenants_v1";
 const ACTIVITIES_STORAGE_KEY = "onecloud_super_admin_activities_v1";

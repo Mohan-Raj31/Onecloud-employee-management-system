@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import type { Tenant, TenantFormData } from "../../../types";
+import type { Tenant, TenantFormData } from "../../types";
 
 interface TenantFormProps {
   tenant?: Tenant;
