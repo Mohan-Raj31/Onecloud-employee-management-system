@@ -116,7 +116,7 @@ function Sidebar({
       className={`
         fixed left-0 top-0 z-[110] flex h-screen flex-col
         overflow-y-auto border-r border-white/5
-        bg-gradient-to-b from-[#080b12] via-[#002885] to-[#043BBD]
+        bg-gradient-to-b from-[#080b12] via-[#002D9E] to-[#061E5C]
         shadow-[8px_0_30px_rgba(15,23,42,0.08)]
         transition-transform duration-400 ease-in-out
         ${isCollapsed ? "w-[78px] min-w-[78px]" : "w-[255px] min-w-[255px] max-[1200px]:w-[225px] max-[1200px]:min-w-[225px]"}
@@ -149,7 +149,7 @@ function Sidebar({
       </div>
 
       <nav
-        className={`flex flex-col gap-0.5 hover:text-cyan-400 hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] ${isCollapsed ? "px-2" : "px-[6px]"}`}
+        className={`flex flex-col gap-0.5 hover:text-cyan-400 hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.3)] ${isCollapsed ? "px-2" : "px-[6px]"}`}
       >
         {items.map((item) => (
           <NavItem
@@ -190,7 +190,7 @@ function NavItem({
       } ${
         active
           ? "bg-gradient-to-r from-indigo-600/35 to-violet-500/15 text-white shadow-[inset_3px_0_0_#818cf8]"
-          : "text-[#DDE1EB] hover:translate-x-[3px] hover:bg-gradient-to-r hover:from-[rgba(79,70,229,0.28)] hover:to-[rgba(99,102,241,0.12)] hover:text-white"
+          : "text-[#EDE1E1] hover:translate-x-[3px] hover:bg-gradient-to-r hover:from-[rgba(79,70,229,0.28)] hover:to-[rgba(99,102,241,0.12)] hover:text-white"
       }`}
     >
       <span
