@@ -116,7 +116,7 @@ function Sidebar({
       className={`
         fixed left-0 top-0 z-[110] flex h-screen flex-col
         overflow-y-auto border-r border-white/5
-        bg-gradient-to-b from-[#080b12] via-[#171d36] to-[#1e1b4b]
+        bg-gradient-to-b from-[#080b12] via-[#002885] to-[#043BBD]
         shadow-[8px_0_30px_rgba(15,23,42,0.08)]
         transition-transform duration-400 ease-in-out
         ${isCollapsed ? "w-[78px] min-w-[78px]" : "w-[255px] min-w-[255px] max-[1200px]:w-[225px] max-[1200px]:min-w-[225px]"}
@@ -129,7 +129,7 @@ function Sidebar({
       `}
     >
       <div
-        className={`flex h-[88px] shrink-0 items-center border-b border-white/20 max-[850px]:hidden ${isCollapsed ? "justify-center px-2" : "justify-between px-[15px]"}`}
+        className={`flex h-[88px] shrink-0 items-center max-[850px]:hidden ${isCollapsed ? "justify-center px-2" : "justify-between px-[15px]"}`}
       >
         <div className={`${isCollapsed ? "hidden" : "block"}`}>
           <p className="text-[21px] font-extrabold tracking-[-0.6px] bg-gradient-to-r from-[#f8fafc] via-[#c7d2fe] to-[#a5b4fc] bg-clip-text text-transparent whitespace-nowrap">
@@ -149,7 +149,7 @@ function Sidebar({
       </div>
 
       <nav
-        className={`mt-2 flex flex-col gap-1 ${isCollapsed ? "px-2" : "px-[15px]"}`}
+        className={`flex flex-col gap-0.5 hover:text-cyan-400 hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)] ${isCollapsed ? "px-2" : "px-[6px]"}`}
       >
         {items.map((item) => (
           <NavItem
@@ -190,7 +190,7 @@ function NavItem({
       } ${
         active
           ? "bg-gradient-to-r from-indigo-600/35 to-violet-500/15 text-white shadow-[inset_3px_0_0_#818cf8]"
-          : "text-[#a8b1c4] hover:translate-x-[3px] hover:bg-gradient-to-r hover:from-[rgba(79,70,229,0.28)] hover:to-[rgba(99,102,241,0.12)] hover:text-white"
+          : "text-[#DDE1EB] hover:translate-x-[3px] hover:bg-gradient-to-r hover:from-[rgba(79,70,229,0.28)] hover:to-[rgba(99,102,241,0.12)] hover:text-white"
       }`}
     >
       <span

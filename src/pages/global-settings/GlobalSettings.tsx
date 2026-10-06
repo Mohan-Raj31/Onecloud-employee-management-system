@@ -258,24 +258,16 @@ export default function GlobalSettings() {
 
   return (
     <div className="space-y-5 pb-6">
-      {/* Page Header */}
-      <div className="rounded-xl  bg-gradient-to-r from-indigo-600 via-blue-800 to-cyan-700 px-4 py-4 shadow-sm sm:px-5">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600">
-            <SettingsIcon />
-          </div>
-
           <div>
-            <h1 className="text-lg font-semibold text-white sm:text-2xl">
+            <h1 className="text-[31px] font-extrabold tracking-[-1px] max-[650px]:text-[25px] bg-gradient-to-r from-blue-900 to-indigo-500 bg-clip-text text-transparent">
               Global Settings
             </h1>
 
-            <p className="mt-0.5 text-xs text-white sm:text-sm">
+            <p className="mt-1 text-sm font-medium text-[#667085]">
               Configure and manage platform-wide
               operational settings.
             </p>
-          </div>
-        </div>
+          
       </div>
 
       {/* Success / Error Messages */}

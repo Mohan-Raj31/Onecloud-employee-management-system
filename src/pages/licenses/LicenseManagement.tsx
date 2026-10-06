@@ -157,11 +157,13 @@ function LicenseManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-800 to-cyan-700 p-5 text-white shadow-lg sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold sm:text-3xl">License Management</h1>
+          <h1 className="text-[31px] font-extrabold tracking-[-1px] max-[650px]:text-[25px] bg-gradient-to-r from-blue-900 to-indigo-500 bg-clip-text text-transparent">
+            License Management
+          </h1>
 
-          <p className="mt-1 text-sm text-blue-100 sm:text-base">
+          <p className="mt-1 text-sm font-medium text-[#667085]">
             Manage platform licenses and organization access
           </p>
         </div>
