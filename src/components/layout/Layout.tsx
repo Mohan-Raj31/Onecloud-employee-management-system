@@ -1,12 +1,9 @@
 import { useState, type ReactNode } from "react";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { Outlet } from "react-router-dom";
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-function Layout({ children }: LayoutProps) {
+function Layout() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -61,7 +58,7 @@ function Layout({ children }: LayoutProps) {
   max-[400px]:px-[11px] max-[400px]:pt-[16px] max-[400px]:pb-[16px]
 `}
       >
-        {children}
+        <Outlet />
       </main>
     </div>
   );

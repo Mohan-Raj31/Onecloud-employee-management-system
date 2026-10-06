@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useEmployees } from "../hooks/useEmployees";
+import { useEmployees } from "../../hooks/useEmployees";
 
 function EmployeeDetails() {
   const { id } = useParams<{ id: string }>();

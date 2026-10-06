@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import EmployeeForm from "../components/employees/EmployeeForm";
-import { useEmployees } from "../hooks/useEmployees";
+import EmployeeForm from "../../components/employees/EmployeeForm";
+import { useEmployees } from "../../hooks/useEmployees";
 
 function EditEmployee() {
   const navigate = useNavigate();

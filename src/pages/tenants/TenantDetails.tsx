@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import TenantStatusBadge from "../components/tenant-management/TenantStatusBadge";
-import { useActivateTenant, useDeactivateTenant, useTenant, useTenantStats } from "../hooks/useTenants";
+import TenantStatusBadge from "../../components/tenant-management/TenantStatusBadge";
+import { useActivateTenant, useDeactivateTenant, useTenant, useTenantStats } from "../../hooks/useTenants";
 
 function TenantDetails() {
   const navigate = useNavigate();

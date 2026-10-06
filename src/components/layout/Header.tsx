@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 interface HeaderProps {
   onMenuClick: () => void;
   isMenuOpen: boolean;
@@ -5,20 +7,39 @@ interface HeaderProps {
 }
 
 function Header({ onMenuClick, isMenuOpen, isSidebarCollapsed }: HeaderProps) {
+  const navigate = useNavigate();
+
+const handleLogout = () => {
+  localStorage.removeItem("onecloud_logged_in");
+  localStorage.removeItem("onecloud_user");
+  localStorage.removeItem("onecloud_remember_me");
+
+  navigate("/login");
+};
   return (
     <header className={`fixed right-0 top-0 z-[100] ${isSidebarCollapsed ? "left-[78px]" : "left-[255px] max-[1200px]:left-[225px]"} max-[850px]:left-0 hidden h-[88px] items-center justify-end border-b border-[#dce4f2] bg-gradient-to-br from-[#f6f6fd] via-[#bed0fc] to-[#b8c8fa] px-[34px] shadow-[0_5px_25px_rgba(15,23,42,0.06)] backdrop-blur-[15px] min-[851px]:flex max-[850px]:sticky max-[850px]:flex max-[850px]:h-[65px] max-[850px]:justify-between max-[850px]:px-4 max-[400px]:px-3`}>
-      <div className="flex items-center gap-4 max-[850px]:order-2">
+      <div className="flex items-center gap-4 max-[850px]:gap-2 max-[400px]:gap-1.5 max-[850px]:order-2">
         <div className="text-right leading-tight">
-          <p className="text-[20px] font-extrabold tracking-[-0.5px] text-slate-950">
+          <p className="text-[20px] font-extrabold tracking-[-0.5px] text-slate-950 max-[850px]:text-[15px] max-[400px]:text-[13px]">
             Super Administrator
           </p>
-          <p className="mt-1 text-[14px] font-medium text-slate-600">
+          <p className="mt-1 text-[14px] font-medium text-slate-600 max-[850px]:text-[11px] max-[400px]:text-[10px]">
             Global access
           </p>
         </div>
-        <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[18px] font-extrabold text-slate-800 shadow-sm">
-          SA
-        </div>
+        <div className="flex items-center gap-3">
+  <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[18px] font-extrabold text-slate-800 shadow-sm max-[850px]:h-9 max-[850px]:w-9 max-[850px]:text-[12px] max-[400px]:h-8 max-[400px]:w-8 max-[400px]:text-[11px]">
+    SA
+  </div>
+
+  <button
+  type="button"
+  onClick={handleLogout}
+  className="rounded-[10px] bg-red-600 px-3 py-2 text-[14px] font-extrabold text-white shadow-sm transition-all duration-200 hover:bg-white hover:text-red-800 max-[850px]:rounded-[7px] max-[850px]:px-2.5 max-[850px]:py-1.5 max-[850px]:text-[11px] max-[400px]:px-2 max-[400px]:py-1 max-[400px]:text-[10px]"
+>
+  Logout
+</button>
+</div>
       </div>
 
       <button

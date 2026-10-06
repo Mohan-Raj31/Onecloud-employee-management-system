@@ -1,20 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EmployeeCard from "../components/employees/EmployeeCard";
-import EmployeeSearch from "../components/employees/EmployeeSearch";
-import EmployeeFilters from "../components/employees/EmployeeFilters";
-import { useEmployees } from "../hooks/useEmployees";
+import EmployeeCard from "../../components/employees/EmployeeCard";
+import EmployeeSearch from "../../components/employees/EmployeeSearch";
+import EmployeeFilters from "../../components/employees/EmployeeFilters";
+import { useEmployees } from "../../hooks/useEmployees";
 
 function Employees() {
   const navigate = useNavigate();
 
-  const {
-    employees,
-    isLoading,
-    isError,
-    deleteEmployee,
-    isDeleting,
-  } = useEmployees();
+  const { employees, isLoading, isError, deleteEmployee, isDeleting } =
+    useEmployees();
 
   const [search, setSearch] = useState("");
   const [department, setDepartment] = useState("All");
@@ -38,8 +33,7 @@ function Employees() {
     const matchesDepartment =
       department === "All" || employee.department === department;
 
-    const matchesStatus =
-      status === "All" || employee.status === status;
+    const matchesStatus = status === "All" || employee.status === status;
 
     return matchesSearch && matchesDepartment && matchesStatus;
   });

@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TenantStatusBadge from "../components/tenant-management/TenantStatusBadge";
+import TenantStatusBadge from "../../components/tenant-management/TenantStatusBadge";
 import {
   useActivateTenant,
   useDeactivateTenant,
   useDeleteTenant,
   useTenants,
-} from "../hooks/useTenants";
-import type { SubscriptionPlan, TenantStatus } from "../types";
+} from "../../hooks/useTenants";
+import type { SubscriptionPlan, TenantStatus } from "../../types";
 
 const pageSize = 8;
 
